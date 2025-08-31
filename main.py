@@ -15,10 +15,10 @@ X = df.drop("ID", axis=1)  # Features (all columns except ID)
 y = df["ID"]  # Target variable
 
 # Split data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Train model
-model = RandomForestClassifier()
+model = RandomForestClassifier(random_state=42)
 model.fit(X_train, y_train)
 
 # Save the trained model
@@ -32,8 +32,8 @@ y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy:.4f}")
 
-x_axis = "S5"
-y_axis = "S6"
+x_axis = "S1"
+y_axis = "S3"
 
 # Plot original data
 plot2d(df, x_axis, y_axis, 1, "original_data.png")
@@ -51,7 +51,7 @@ df_misclassified["ID"] = y_test
 misclassified_mask = y_test != y_pred
 df_misclassified = df_misclassified[misclassified_mask]
 
-print(df_misclassified)
+# print(df_misclassified)
 
 # Plot misclassified points
 if not df_misclassified.empty:

@@ -39,7 +39,8 @@ colors = np.array(
 def read_root(fname):
     with uproot.open(fname) as f:
         tree = f["LYSO"]
-        arrays = tree.arrays(["S1", "S2", "S3", "S4", "S5", "S6", "ID"], library="np")
+        # arrays = tree.arrays(["S1", "S2", "S3", "S4", "S5", "S6", "ID"], library="np")
+        arrays = tree.arrays(["S1", "S3", "S5", "ID"], library="np")
     df = pd.DataFrame(arrays)
     df["ID"] = df["ID"].astype(int)
     return df
